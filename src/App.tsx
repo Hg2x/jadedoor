@@ -31,6 +31,15 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
+    const fetchChatLogs = async () => {
+      try {
+        const response = await axios.get('http://localhost:8000/get_chat_logs');
+        setChatLogs(response.data.chat_logs);
+      } catch (error) {
+        console.error('Error fetching chat logs:', error);
+      }
+    };
+    fetchChatLogs();
     adjustHeight();
   }, []);
 
