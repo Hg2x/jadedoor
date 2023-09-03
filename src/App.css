@@ -44,13 +44,6 @@
   background-color: #006942; /* Darker shade on hover */
 }
 
-/* Response area */
-.response {
-  background-color: #e6f7eb; /* Light jade green for response area */
-  padding: 10px;
-  border-radius: 5px;
-}
-
 .autoExpand {
   width: 100%;
   resize: vertical;

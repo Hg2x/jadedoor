@@ -78,7 +78,6 @@ const App: React.FC = () => {
           Clear Chat History
         </button>
       </div>
-      {generatedResult && <div className="response">Response: {generatedResult}</div>}
       <div className="chat-history">
           {chatLogs.map((log, index) => (
               <div key={index} className={`chat-log ${log.role}`}>
