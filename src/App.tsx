@@ -46,19 +46,28 @@ const App: React.FC = () => {
     console.log(`API call took ${duration} ms`);
   };
 
+  const handleClearChat = async () => {
+    await axios.post('http://localhost:8000/clear_chat');
+    setGeneratedResult(null);
+    // TODO: Clear displayed chat logs
+  };
+
   return (
     <div className="app-container">
         <div className="input-area">
         <textarea
-        ref={textAreaRef}
-        className="input-field autoExpand"
-        value={userPrompt}
-        onChange={handleInputChange}
-        placeholder="Enter your prompt"
-        rows={1}
+          ref={textAreaRef}
+          className="input-field autoExpand"
+          value={userPrompt}
+          onChange={handleInputChange}
+          placeholder="Enter your prompt"
+          rows={1}
         />
         <button className="generate-btn" onClick={handleSubmit}>
           Generate Reply
+        </button>
+        <button onClick={handleClearChat}>
+          Clear Chat History
         </button>
       </div>
       {generatedResult && <div className="response">Response: {generatedResult}</div>}
