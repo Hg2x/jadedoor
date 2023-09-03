@@ -1,51 +1,15 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-app-container {
+/* Base styling for the container */
+.app-container {
   font-family: Arial, sans-serif;
   max-width: 600px;
   margin: 50px auto;
   padding: 20px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
+  background-color: #f9f9f9; /* Light background for contrast */
 }
 
+/* Input area styling */
 .input-area {
   display: flex;
   gap: 10px;
@@ -56,46 +20,62 @@ app-container {
   flex: 1;
   padding: 10px;
   border-radius: 5px;
-  border: 1px solid #ccc;
+  border: 2px solid #00A86B; /* Jade green border */
+  transition: border-color 0.3s ease;
 }
 
+.input-field:focus {
+  border-color: #006942; /* Darker shade for focus */
+  outline: none;
+}
+
+/* Buttons */
 .generate-btn {
   padding: 10px 20px;
   border: none;
-  background-color: #007BFF;
+  background-color: #00A86B; /* Jade green background */
   color: #fff;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
+.generate-btn:hover {
+  background-color: #006942; /* Darker shade on hover */
+}
+
+/* Response area */
 .response {
-  background-color: #f4f4f4;
+  background-color: #e6f7eb; /* Light jade green for response area */
   padding: 10px;
   border-radius: 5px;
 }
 
 .autoExpand {
   width: 100%;
-  resize: vertical; 
+  resize: vertical;
   overflow-y: hidden; /* Hide vertical scrollbar */
 }
 
+/* Chat logs */
 .chat-history {
   max-height: 400px;
   overflow-y: auto;
-  border: 1px solid #ccc;
+  border: 1px solid #00A86B; /* Jade green border */
   margin: 20px 0;
   padding: 10px;
+  border-radius: 5px;
 }
 
 .chat-log {
   margin-bottom: 10px;
+  font-weight: 500; /* Slightly bold text for readability */
 }
 
 .chat-log.user {
-  color: blue;
+  color: #006942; /* Darker shade of jade for user */
 }
 
 .chat-log.assistant {
-  color: green;
+  color: #00A86B; /* Jade green for the assistant */
 }
