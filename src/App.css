@@ -79,3 +79,23 @@ app-container {
   resize: vertical; 
   overflow-y: hidden; /* Hide vertical scrollbar */
 }
+
+.chat-history {
+  max-height: 400px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  margin: 20px 0;
+  padding: 10px;
+}
+
+.chat-log {
+  margin-bottom: 10px;
+}
+
+.chat-log.user {
+  color: blue;
+}
+
+.chat-log.assistant {
+  color: green;
+}

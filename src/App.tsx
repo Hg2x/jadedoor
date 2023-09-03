@@ -7,7 +7,14 @@ const App: React.FC = () => {
   const [userPrompt, setUserPrompt] = useState('');
   const [generatedResult, setGeneratedResult] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false); // New loading state
+  const [chatLogs, setChatLogs] = useState<ChatLogs>([]);
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
+
+  type ChatLog = {
+    role: 'user' | 'system' | 'assistant';
+    content: string;
+  }
+  type ChatLogs = ChatLog[];
 
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setUserPrompt(e.target.value);
@@ -35,6 +42,7 @@ const App: React.FC = () => {
         user_prompt: userPrompt,
       });
       setGeneratedResult(response.data.generated_result);
+      setChatLogs(response.data.chat_logs);
     } catch (error) {
       console.error('Error fetching data:', error);
     } finally {
@@ -49,7 +57,7 @@ const App: React.FC = () => {
   const handleClearChat = async () => {
     await axios.post('http://localhost:8000/clear_chat');
     setGeneratedResult(null);
-    // TODO: Clear displayed chat logs
+    setChatLogs([]);
   };
 
   return (
@@ -71,6 +79,13 @@ const App: React.FC = () => {
         </button>
       </div>
       {generatedResult && <div className="response">Response: {generatedResult}</div>}
+      <div className="chat-history">
+          {chatLogs.map((log, index) => (
+              <div key={index} className={`chat-log ${log.role}`}>
+                  <strong>{log.role}:</strong> {log.content}
+              </div>
+          ))}
+      </div>
       {isLoading && <div>Loading...</div>}
     </div>
   );
