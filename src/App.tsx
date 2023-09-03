@@ -9,6 +9,7 @@ const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false); // New loading state
   const [chatLogs, setChatLogs] = useState<ChatLogs>([]);
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
+  const chatHistoryRef = useRef<HTMLDivElement | null>(null);
 
   type ChatLog = {
     role: 'user' | 'system' | 'assistant';
@@ -32,6 +33,13 @@ const App: React.FC = () => {
   useEffect(() => {
     adjustHeight();
   }, []);
+
+  useEffect(() => {
+    if (chatHistoryRef.current) {
+        const element = chatHistoryRef.current;
+        element.scrollTop = element.scrollHeight;
+    }
+  }, [chatLogs]);
 
   const handleSubmit = async () => {
     const startTime = new Date();
@@ -78,7 +86,7 @@ const App: React.FC = () => {
           Clear Chat History
         </button>
       </div>
-      <div className="chat-history">
+      <div className="chat-history" ref={chatHistoryRef}>
           {chatLogs.map((log, index) => (
               <div key={index} className={`chat-log ${log.role}`}>
                   <strong>{log.role}:</strong> {log.content}
