@@ -34,6 +34,9 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
+    if (!process.env.REACT_APP_BACKEND_URL) {
+      throw new Error("REACT_APP_BACKEND_URL is not set!");
+    }
     const fetchChatLogs = async () => {
       try {
         const response = await axios.get(backendUrl + '/get_chat_logs');
