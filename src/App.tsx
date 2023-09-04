@@ -11,6 +11,9 @@ const App: React.FC = () => {
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
   const chatHistoryRef = useRef<HTMLDivElement | null>(null);
 
+  const backendUrl = process.env.REACT_APP_BACKEND_URL as string;
+  const apiKey = process.env.REACT_APP_API_KEY as string;
+
   type ChatLog = {
     role: 'user' | 'system' | 'assistant';
     content: string;
@@ -33,10 +36,10 @@ const App: React.FC = () => {
   useEffect(() => {
     const fetchChatLogs = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/get_chat_logs');
+        const response = await axios.get(backendUrl + '/get_chat_logs');
         setChatLogs(response.data.chat_logs);
       } catch (error) {
-        console.error('Error fetching chat logs:', error);
+        console.error('Error fetching chat logs:', error); // TODO: display error to user
       }
     };
     fetchChatLogs();
@@ -55,13 +58,13 @@ const App: React.FC = () => {
 
     setIsLoading(true);
     try {
-      const response = await axios.post('http://localhost:8000/', {
+      const response = await axios.post(backendUrl, {
         user_prompt: userPrompt,
       });
       setGeneratedResult(response.data.generated_result);
       setChatLogs(response.data.chat_logs);
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error('Error fetching data:', error); // TODO: display error to user
     } finally {
       setIsLoading(false);
     }
@@ -72,7 +75,7 @@ const App: React.FC = () => {
   };
 
   const handleClearChat = async () => {
-    await axios.post('http://localhost:8000/clear_chat');
+    await axios.post(backendUrl + '/clear_chat');
     setGeneratedResult(null);
     setChatLogs([]);
   };
