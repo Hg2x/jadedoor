@@ -101,14 +101,14 @@ const App: React.FC = () => {
           Clear Chat History
         </button>
       </div>
+      {isLoading && <div>Loading...</div>}
       <div className="chat-history" ref={chatHistoryRef}>
-          {chatLogs.map((log, index) => (
+          {chatLogs.map((log, index) => ( // TODO: use unique IDs instead of index
               <div key={index} className={`chat-log ${log.role}`}>
                   <strong>{log.role}:</strong> {log.content}
               </div>
           ))}
       </div>
-      {isLoading && <div>Loading...</div>}
     </div>
   );
 };
