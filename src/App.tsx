@@ -39,7 +39,7 @@ const App: React.FC = () => {
     }
     const fetchChatLogs = async () => {
       try {
-        const response = await axios.get(backendUrl + '/get_chat_logs');
+        const response = await axios.get(backendUrl + '/chat_logs');
         setChatLogs(response.data.chat_logs);
       } catch (error) {
         console.error('Error fetching chat logs:', error); // TODO: display error to user
@@ -61,9 +61,7 @@ const App: React.FC = () => {
 
     setIsLoading(true);
     try {
-      const response = await axios.post(backendUrl, {
-        user_prompt: userPrompt,
-      });
+      const response = await axios.post(backendUrl + '/generate_reply', {user_prompt: userPrompt,});
       setGeneratedResult(response.data.generated_result);
       setChatLogs(response.data.chat_logs);
     } catch (error) {
@@ -78,7 +76,7 @@ const App: React.FC = () => {
   };
 
   const handleClearChat = async () => {
-    await axios.post(backendUrl + '/clear_chat');
+    await axios.delete(backendUrl + '/chat_logs');
     setGeneratedResult(null);
     setChatLogs([]);
   };
