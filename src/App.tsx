@@ -101,7 +101,9 @@ const App: React.FC = () => {
           Clear Chat History
         </button>
       </div>
-      {isLoading && <div>Loading...</div>}
+      <div className={`loading-container ${isLoading ? '' : 'hidden'}`}>
+          Loading...
+      </div>
       <div className="chat-history" ref={chatHistoryRef}>
           {chatLogs.map((log, index) => ( // TODO: use unique IDs instead of index
               <div key={index} className={`chat-log ${log.role}`}>

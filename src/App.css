@@ -72,3 +72,14 @@
 .chat-log.assistant {
   color: #00A86B; /* Jade green for the assistant */
 }
+
+.loading-container {
+  height: 30px;  /* Adjust the height according to your need */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hidden {
+  visibility: hidden;
+}
