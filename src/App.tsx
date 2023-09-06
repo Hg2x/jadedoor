@@ -8,6 +8,8 @@ const App: React.FC = () => {
   const [generatedResult, setGeneratedResult] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false); // New loading state
   const [chatLogs, setChatLogs] = useState<ChatLogs>([]);
+  const [promptTokens, setPromptTokens] = useState<number | null>(null);
+  const [completionTokens, setCompletionTokens] = useState<number | null>(null);
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
   const chatHistoryRef = useRef<HTMLDivElement | null>(null);
 
@@ -64,6 +66,8 @@ const App: React.FC = () => {
       const response = await axios.post(backendUrl + '/generate_reply', {user_prompt: userPrompt,});
       setGeneratedResult(response.data.generated_result);
       setChatLogs(response.data.chat_logs);
+      setPromptTokens(response.data.prompt_tokens);
+      setCompletionTokens(response.data.completion_tokens);
     } catch (error) {
       console.error('Error fetching data:', error); // TODO: display error to user
     } finally {
@@ -101,6 +105,10 @@ const App: React.FC = () => {
       </div>
       <div className={`loading-container ${isLoading ? '' : 'hidden'}`}>
           Loading...
+      </div>
+      <div className="token-info">
+        <div><strong>Prompt Tokens:</strong> {promptTokens}</div>
+        <div><strong>Completion Tokens:</strong> {completionTokens}</div>
       </div>
       <div className="chat-history" ref={chatHistoryRef}>
           {chatLogs.map((log, index) => ( // TODO: use unique IDs instead of index
