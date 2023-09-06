@@ -5,7 +5,6 @@ import './App.css';
 
 const App: React.FC = () => {
   const [userPrompt, setUserPrompt] = useState('');
-  const [generatedResult, setGeneratedResult] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false); // New loading state
   const [chatLogs, setChatLogs] = useState<ChatLogs>([]);
   const [promptTokens, setPromptTokens] = useState<number | null>(null);
@@ -64,7 +63,6 @@ const App: React.FC = () => {
     setIsLoading(true);
     try {
       const response = await axios.post(backendUrl + '/generate_reply', {user_prompt: userPrompt,});
-      setGeneratedResult(response.data.generated_result);
       setChatLogs(response.data.chat_logs);
       setPromptTokens(response.data.prompt_tokens);
       setCompletionTokens(response.data.completion_tokens);
@@ -81,7 +79,6 @@ const App: React.FC = () => {
 
   const handleClearChat = async () => {
     await axios.delete(backendUrl + '/chat_logs');
-    setGeneratedResult(null);
     setChatLogs([]);
   };
 
@@ -111,11 +108,12 @@ const App: React.FC = () => {
         <div><strong>Completion Tokens:</strong> {completionTokens}</div>
       </div>
       <div className="chat-history" ref={chatHistoryRef}>
-          {chatLogs.map((log, index) => ( // TODO: use unique IDs instead of index
-              <div key={index} className={`chat-log ${log.role}`}>
-                  <strong>{log.role}:</strong> {log.content}
-              </div>
-          ))}
+        {chatLogs.map((log, index) => (
+          <div key={index} className={`chat-log ${log.role}`}>
+            <strong>{log.role}:</strong>
+            <pre className="chat-content">{log.content}</pre>
+          </div>
+        ))}
       </div>
     </div>
   );

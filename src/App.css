@@ -83,3 +83,12 @@
 .hidden {
   visibility: hidden;
 }
+
+.chat-content {
+  background-color: #f0f0f0;  /* Light gray */
+  border-radius: 5px;
+  padding: 8px;
+  white-space: pre-wrap; /* To ensure code formatting */
+  font-family: 'Courier New', monospace;
+  overflow-x: auto;
+}
