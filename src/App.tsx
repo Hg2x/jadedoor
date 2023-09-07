@@ -86,6 +86,10 @@ const App: React.FC = () => {
     setChatLogs([]);
   };
 
+  const clearInput = () => {
+    setUserPrompt('');
+  };
+
   const toggleModel = () => {
     setSelectedModel(prev => prev === 'gpt-3.5-turbo' ? 'gpt-4' : 'gpt-3.5-turbo');
   };
@@ -103,6 +107,9 @@ const App: React.FC = () => {
         />
         <button className="generate-btn" onClick={handleSubmit}>
           Generate Reply
+        </button>
+        <button onClick={clearInput}>
+          Clear Chat History
         </button>
         <button onClick={handleClearChat}>
           Clear Chat History
