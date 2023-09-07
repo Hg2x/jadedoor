@@ -109,7 +109,7 @@ const App: React.FC = () => {
           Generate Reply
         </button>
         <button onClick={clearInput}>
-          Clear Chat History
+          Clear Input
         </button>
         <button onClick={handleClearChat}>
           Clear Chat History
