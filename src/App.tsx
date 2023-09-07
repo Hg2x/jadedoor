@@ -9,6 +9,7 @@ const App: React.FC = () => {
   const [chatLogs, setChatLogs] = useState<ChatLogs>([]);
   const [promptTokens, setPromptTokens] = useState<number | null>(null);
   const [completionTokens, setCompletionTokens] = useState<number | null>(null);
+  const [selectedModel, setSelectedModel] = useState('gpt-3.5-turbo');
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
   const chatHistoryRef = useRef<HTMLDivElement | null>(null);
 
@@ -62,7 +63,10 @@ const App: React.FC = () => {
 
     setIsLoading(true);
     try {
-      const response = await axios.post(backendUrl + '/generate_reply', {user_prompt: userPrompt,});
+      const response = await axios.post(backendUrl + '/generate_reply', {
+        user_prompt: userPrompt,
+        model: selectedModel,
+      });
       setChatLogs(response.data.chat_logs);
       setPromptTokens(response.data.prompt_tokens);
       setCompletionTokens(response.data.completion_tokens);
@@ -80,6 +84,10 @@ const App: React.FC = () => {
   const handleClearChat = async () => {
     await axios.delete(backendUrl + '/chat_logs');
     setChatLogs([]);
+  };
+
+  const toggleModel = () => {
+    setSelectedModel(prev => prev === 'gpt-3.5-turbo' ? 'gpt-4' : 'gpt-3.5-turbo');
   };
 
   return (
@@ -106,6 +114,9 @@ const App: React.FC = () => {
       <div className="token-info">
         <div><strong>Prompt Tokens:</strong> {promptTokens}</div>
         <div><strong>Completion Tokens:</strong> {completionTokens}</div>
+        <button onClick={toggleModel}>
+          Toggle Model (Current: {selectedModel})
+        </button>
       </div>
       <div className="chat-history" ref={chatHistoryRef}>
         {chatLogs.map((log, index) => (
