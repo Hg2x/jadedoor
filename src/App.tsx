@@ -88,6 +88,7 @@ const App: React.FC = () => {
 
   const clearInput = () => {
     setUserPrompt('');
+    setTimeout(adjustHeight, 0);
   };
 
   const toggleModel = () => {
