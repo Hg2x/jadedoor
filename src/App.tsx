@@ -13,8 +13,7 @@ const App: React.FC = () => {
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
   const chatHistoryRef = useRef<HTMLDivElement | null>(null);
 
-  const backendUrl = process.env.REACT_APP_BACKEND_URL as string;
-  const apiKey = process.env.REACT_APP_API_KEY as string;
+  const backendUrl = "http://127.0.0.1:8000"
 
   type ChatLog = {
     role: 'user' | 'system' | 'assistant';
@@ -36,9 +35,6 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
-    if (!process.env.REACT_APP_BACKEND_URL) {
-      throw new Error("REACT_APP_BACKEND_URL is not set!");
-    }
     const fetchChatLogs = async () => {
       try {
         const response = await axios.get(backendUrl + '/chat_logs');
