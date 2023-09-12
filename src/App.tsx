@@ -1,11 +1,10 @@
-// npm start
 import React, { useRef, useEffect, useState } from 'react';
 import axios from 'axios';
 import './App.css';
 
 const App: React.FC = () => {
   const [userPrompt, setUserPrompt] = useState('');
-  const [isLoading, setIsLoading] = useState(false); // New loading state
+  const [isLoading, setIsLoading] = useState(false);
   const [chatLogs, setChatLogs] = useState<ChatLogs>([]);
   const [promptTokens, setPromptTokens] = useState<number | null>(null);
   const [completionTokens, setCompletionTokens] = useState<number | null>(null);
