@@ -1,94 +1,108 @@
-/* Base styling for the container */
-.app-container {
-  font-family: Arial, sans-serif;
-  max-width: 80%;
-  margin: 50px auto;
-  padding: 20px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  background-color: #f9f9f9; /* Light background for contrast */
+/* Variables for maintaining a consistent color scheme */
+:root {
+  --jade-green: #00A86B;
+  --darker-jade-green: #006942;
+  --light-background: #f9f9f9;
+  --light-gray: #f0f0f0;
 }
 
-/* Input area styling */
+/* Base styling for the container */
+.app-container {
+  background-color: var(--light-background);
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+  margin: 50px auto;
+  max-width: 80%;
+  padding: 20px;
+}
+
+/* Styling for the input area */
 .input-area {
   display: flex;
   gap: 10px;
   margin-bottom: 20px;
 }
 
+/* Input field styling */
 .input-field {
+  border: 2px solid var(--jade-green);
+  border-radius: 5px;
   flex: 1;
   padding: 10px;
-  border-radius: 5px;
-  border: 2px solid #00A86B; /* Jade green border */
   transition: border-color 0.3s ease;
 }
 
 .input-field:focus {
-  border-color: #006942; /* Darker shade for focus */
+  border-color: var(--darker-jade-green);
   outline: none;
 }
 
-/* Buttons */
+/* Button styling */
 .generate-btn {
-  padding: 10px 20px;
+  background-color: var(--jade-green);
   border: none;
-  background-color: #00A86B; /* Jade green background */
-  color: #fff;
   border-radius: 5px;
+  color: #fff;
   cursor: pointer;
+  padding: 10px 20px;
   transition: background-color 0.3s ease;
 }
 
 .generate-btn:hover {
-  background-color: #006942; /* Darker shade on hover */
+  background-color: var(--darker-jade-green);
 }
 
+/* Auto-expand styling */
 .autoExpand {
-  width: 100%;
-  resize: vertical;
   overflow-y: hidden; /* Hide vertical scrollbar */
+  resize: vertical;
+  width: 100%;
 }
 
-/* Chat logs */
+/* Chat history container styling */
 .chat-history {
+  border: 1px solid var(--jade-green);
+  border-radius: 5px;
+  margin: 20px 0;
   max-height: 400px;
   overflow-y: auto;
-  border: 1px solid #00A86B; /* Jade green border */
-  margin: 20px 0;
   padding: 10px;
-  border-radius: 5px;
 }
 
+/* Chat log styling */
 .chat-log {
-  margin-bottom: 10px;
   font-weight: 500; /* Slightly bold text for readability */
+  margin-bottom: 10px;
 }
 
 .chat-log.user {
-  color: #006942; /* Darker shade of jade for user */
+  color: var(--darker-jade-green);
 }
 
 .chat-log.assistant {
-  color: #00A86B; /* Jade green for the assistant */
+  color: var(--jade-green);
 }
 
+/* Loading container styling */
 .loading-container {
-  height: 30px;  /* Adjust the height according to your need */
-  display: flex;
   align-items: center;
+  display: flex;
+  height: 30px;  /* Adjust the height according to your need */
   justify-content: center;
 }
 
+/* Hidden element styling */
 .hidden {
   visibility: hidden;
 }
 
+/* Chat content styling */
 .chat-content {
-  background-color: #f0f0f0;  /* Light gray */
+  background-color: var(--light-gray);
   border-radius: 5px;
-  padding: 8px;
-  white-space: pre-wrap; /* To ensure code formatting */
   font-family: 'Courier New', monospace;
   overflow-x: auto;
+  padding: 8px;
+  white-space: pre-wrap; /* To ensure code formatting */
 }
